@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+		<title>Countries</title>
+	</head>
+	<body>
+		<header class="container">
+			<nav>
+				<ul class="flex-center-center">
+					<li><a class="active" href="index.html">Countries</a></li>
+					<li><a href="second.html">Top Headlines</a></li>
+					<li><a href="third.html">Search Newses</a></li>
+				</ul>
+			</nav>
+		</header>
+		<section class="countries container">
+			<div class="countries__search">
+				<input
+					type="text"
+					name="searchBar"
+					id="country-search"
+					placeholder="Search country By Its Name"
+				/>
+			</div>
+			<div class="see-more">*Click On The Flag To See More Info</div>
+			<div class="country-list"></div>
+		</section>
+		<section class="modal">
+			<div class="country__modal">
+				<div class="close"><span> </span><span></span></div>
+				<div class="country-name">
+					<h3></h3>
+				</div>
+				<div class="country__info">
+					<div>
+						<table>
+							<tbody>
+								<tr>
+									<td>Continents</td>
+									<td class="continents"></td>
+								</tr>
+								<tr>
+									<td>Region</td>
+									<td class="region"></td>
+								</tr>
+								<tr>
+									<td>Area</td>
+									<td class="area"></td>
+								</tr>
+								<tr>
+									<td>Population</td>
+									<td class="population"></td>
+								</tr>
+								<tr>
+									<td>Capital</td>
+									<td class="capital"></td>
+								</tr>
+								<tr>
+									<td>Languages</td>
+									<td class="language"></td>
+								</tr>
+								<tr>
+									<td>Currencies</td>
+									<td class="currency"></td>
+								</tr>
+								<tr>
+									<td>Time Zones</td>
+									<td class="time-zones"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="country__images">
+						<img class="flag" src="" alt="" />
+						<img class="coat-of-arms" src="" alt="" />
+					</div>
+					<div class="map">
+						<iframe
+							src=""
+							width="100%"
+							height="100%"
+							style="border: 0"
+							allowfullscreen=""
+							loading="lazy"
+						></iframe>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>
