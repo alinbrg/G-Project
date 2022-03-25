@@ -8,7 +8,7 @@ let searchWord = "",
 	q = document.querySelector("#q"),
 	articleList = document.querySelector(".articles__list");
 
-import { createNewsItem } from "./modules.js";
+import { createNewsItem, scrollToTop } from "./modules.js";
 
 q.addEventListener("input", () => {
 	searchWord = q.value;
@@ -17,9 +17,10 @@ q.addEventListener("input", () => {
 selectForms.forEach((form) => {
 	listenFormSelect(form);
 });
-
+scrollToTop();
 function listenFormSelect(form) {
 	form.addEventListener("change", (e) => {
+		q.value = null;
 		e.preventDefault();
 		if (form.classList.contains("headlines-form-category")) {
 			// console.log("category", );
@@ -27,7 +28,7 @@ function listenFormSelect(form) {
 			newsHUrl = `https://newsapi.org/v2/top-headlines?country=us&category=${selectCategory}&apiKey=a094f869549b4b41a8fdb313ba2baaf9`;
 		}
 		if (form.classList.contains("headlines-form-country")) {
-			console.log("country");
+			// console.log("country");
 			selectCountry = e.target.value;
 			newsHUrl = `https://newsapi.org/v2/top-headlines?country=${selectCountry}&apiKey=a094f869549b4b41a8fdb313ba2baaf9`;
 		}
@@ -35,17 +36,17 @@ function listenFormSelect(form) {
 			url: newsHUrl,
 			method: "get",
 			success: function (data) {
-				console.log(data);
+				// console.log(data);
 				if (data.status == "ok") {
 					let articles = data.articles;
-					console.log(articles);
+					// console.log(articles);
 					clearResults(articleList);
 					if (articles.length == 0) {
-						console.log("no results");
+						// console.log("no results");
 						noResults(articleList);
 					} else {
 						clearResults(articleList);
-						articles.forEach((element) => {
+						articles.forEach((element, index) => {
 							createNewsItem(element, articleList);
 						});
 					}
@@ -62,7 +63,7 @@ function listenFormSelect(form) {
 
 qForm.addEventListener("submit", (e) => {
 	e.preventDefault();
-	console.log("q", searchWord);
+	// console.log("q", searchWord);
 	newsQUrl = `https://newsapi.org/v2/everything?q=${searchWord}&apiKey=a094f869549b4b41a8fdb313ba2baaf9`;
 
 	$.ajax({
@@ -72,7 +73,7 @@ qForm.addEventListener("submit", (e) => {
 			// console.log(data);
 			if (data.status == "ok") {
 				let articles = data.articles;
-				// console.log(articles);
+				console.log(articles);
 				clearResults(articleList);
 				if (articles.length == 0) {
 					noResults(articleList);
@@ -93,7 +94,7 @@ qForm.addEventListener("submit", (e) => {
 });
 
 function clearResults(articleList) {
-	let oldArticles = articleList.querySelectorAll("div");
+	let oldArticles = articleList.querySelectorAll("a, div");
 	oldArticles.forEach((element) => {
 		element.remove();
 	});

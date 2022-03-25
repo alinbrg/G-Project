@@ -7,6 +7,7 @@
 	color: rgb(27, 27, 27);
 	/* font-family: "Kodchasan", sans-serif; */
 	font-family: "Marvel", sans-serif;
+	transition: all 0.3s;
 }
 h1,
 h2,
@@ -31,45 +32,100 @@ a {
 	margin: auto;
 	/* padding: 0 30px; */
 }
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
 .flex-center-center {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
+header {
+	background-color: white;
+	height: 70px;
+}
 header nav ul {
 	gap: 25px;
 }
-header {
+header nav {
+	width: 100%;
 	padding: 20px 0;
 	position: fixed;
 	top: 0;
+	height: 80px;
 	background-color: white;
+	z-index: 10;
+	left: 50%;
+	transform: translateX(-50%);
 }
 header a {
 	font-size: clamp(24px, 2.5vw, 30px);
 	font-weight: bolder;
 	font-family: "Marvel", sans-serif;
+	padding-bottom: 5px;
 }
 header a.active {
-	border-bottom: 1px solid;
+	color: rgb(216, 7, 216);
 }
 header a:hover {
+	text-shadow: 0px 0px 1px rgb(216 7 216);
 	border-bottom: 1px solid;
+}
+header a.active:hover {
+	border-bottom: none;
 }
 @media (max-width: 1024px) {
 	header nav ul {
 		gap: 15px;
 	}
 }
+.scroll-to-top {
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	font-size: 50px;
 
+	box-shadow: 0px 3px 15px rgb(0 0 0 / 8%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: rgb(216, 7, 216);
+	background-color: rgb(10, 9, 9);
+}
+.scroll-to-top:hover {
+	color: black;
+	background-color: rgb(216, 7, 216);
+}
 .countries,
 .search__news {
-	margin-top: 100px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 .countries__search {
 	width: 100%;
-	padding-bottom: 50px;
-	padding-top: 10px;
+	margin-bottom: 50px;
+	margin-top: 10px;
+	position: sticky;
+	top: 80px;
 }
 .countries__search input {
 	width: 90%;
@@ -80,6 +136,10 @@ header a:hover {
 	border-radius: 4px;
 	height: 40px;
 	padding: 0 10px;
+	font-size: 14px;
+}
+.countries__search input::placeholder {
+	font-size: 14px;
 }
 .see-more {
 	text-align: center;
@@ -96,6 +156,7 @@ header a:hover {
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
+	padding: 20px 0;
 }
 .country-item div {
 	height: 100%;
@@ -103,11 +164,17 @@ header a:hover {
 .country-item img {
 	width: 100%;
 }
+
 .country-item h5 {
 	text-align: center;
 	font-size: 24px;
 }
 
+.country-item:hover {
+	background-color: rgb(216, 212, 212);
+	box-shadow: 0px 3px 15px rgb(0 0 0 / 8%);
+	border-radius: 8px;
+}
 @media (max-width: 1024px) {
 	.country-list {
 		grid-template-columns: 1fr 1fr;
@@ -130,7 +197,8 @@ header a:hover {
 	justify-content: center;
 	top: 0;
 	left: 0;
-	padding-top: 200px;
+	padding-top: 100px;
+	overflow: auto;
 }
 
 .modal.active {
@@ -241,6 +309,11 @@ table td:first-child {
 		padding: 0 10px;
 		padding-bottom: 100px;
 	}
+	.scroll-to-top:hover,
+	.scroll-to-top {
+		color: rgb(216, 7, 216);
+		background-color: black;
+	}
 }
 
 /* articles */
@@ -253,22 +326,36 @@ table td:first-child {
 	font-size: 24px;
 }
 .article__item {
-	display: grid;
-	grid-template-columns: repeat(2, 50%);
 	margin-bottom: 30px;
 	box-shadow: 0px 3px 15px rgb(0 0 0 / 8%);
+	border-radius: 8px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 0;
 }
-
+.article__item:hover .article__img img {
+	filter: grayscale(0%);
+}
+.article__item:hover {
+	box-shadow: 0px 3px 15px rgb(0 0 0 / 50%);
+}
+.article__img {
+	overflow: hidden;
+	height: 225px;
+}
 .article__img img {
+	border-radius: 8px 8px 0 0;
 	width: 100%;
-	/* height: 225px; */
-	object-fit: contain;
+	height: 225px;
+	object-fit: cover;
+	filter: grayscale(80%);
 }
 .article__src {
 	display: flex;
 	flex-direction: column;
 	padding: 15px;
-	height: 100%;
+	height: calc(100% - 225px);
 }
 
 .article__head {
@@ -286,10 +373,17 @@ table td:first-child {
 	gap: 5px;
 	font-size: 14px;
 }
-
-@media (max-width: 1024px) {
-	.article__item {
+.articles__list {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 30px;
+}
+@media (max-width: 700px) {
+	.articles__list {
 		grid-template-columns: 1fr;
+	}
+	.article__img img {
+		filter: grayscale(0%);
 	}
 }
 

@@ -25,7 +25,8 @@ $(document).ready(function () {
 		},
 	});
 });
-
+import { scrollToTop } from "./modules.js";
+scrollToTop();
 function createCountryBlock(item) {
 	const countryItem = document.createElement("div");
 	countryItem.classList.add("country-item");
@@ -73,9 +74,9 @@ function searchCountry() {
 
 		let li = [...document.querySelectorAll(".country-item")];
 
-		for (i = 0; i < li.length; i++) {
-			a = li[i].getElementsByTagName("h5")[0];
-			txtValue = a.textContent || a.innerText;
+		for (let i = 0; i < li.length; i++) {
+			let a = li[i].getElementsByTagName("h5")[0];
+			let txtValue = a.textContent || a.innerText;
 			if (txtValue.toUpperCase().indexOf(searchString) > -1) {
 				li[i].style.display = "";
 			} else {
@@ -112,7 +113,7 @@ function addModal(item) {
 		(flag.src = item.flags.png),
 		(coatOfArms.src = item.coatOfArms.png),
 		(map.textContent = item.name.official + "'s map link"),
-		(map.src = `https://maps.google.com/maps?q=${item.latlng[0]},${item.latlng[1]}&hl=es&z=14&output=embed`);
+		(map.src = `https://maps.google.com/maps?q=${item.latlng[0]},${item.latlng[1]}&hl=en&z=14&output=embed`);
 }
 
 document.querySelector(".close").addEventListener("click", () => {

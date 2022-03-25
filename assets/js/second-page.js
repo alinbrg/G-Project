@@ -1,7 +1,7 @@
 let topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=a094f869549b4b41a8fdb313ba2baaf9`,
 	articleList = document.querySelector(".articles__list");
 
-import { createNewsItem } from "./modules.js";
+import { createNewsItem, scrollToTop } from "./modules.js";
 $.ajax({
 	url: topHeadlinesUrl,
 	method: "get",
@@ -21,3 +21,5 @@ $.ajax({
 		console.log(error);
 	},
 });
+
+scrollToTop();
