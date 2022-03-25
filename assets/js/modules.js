@@ -22,7 +22,9 @@ export function createNewsItem(item, articleList) {
 			</div>
 		</div>
 	`;
-
+	if (!item.urlToImage) {
+		newsItem.querySelector("img").src = "assets/img/news.jpg";
+	}
 	articleList.append(newsItem);
 }
 
